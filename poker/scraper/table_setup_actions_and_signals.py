@@ -454,7 +454,9 @@ class TableSetupActionAndSignals(QObject):
 
     @pyqtSlot(object)
     def _recognize_number(self):
-        self.recognized_number = get_ocr_float(self.preview)
+        table_name = self.ui.table_name.currentText()
+        self.float = get_ocr_float(self.preview, table_name)
+        self.recognized_number = self.float
         log.info(f"Recognized number is: {self.recognized_number}")
         self.signal_update_label.emit('tesseract_label', str(self.recognized_number))
 
